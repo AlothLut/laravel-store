@@ -11,3 +11,9 @@ key-generate:
 
 config-cache:
 	docker-compose exec php-fpm php artisan config:cache
+
+connect-db:
+	docker-compose exec db bash
+
+connect-app:
+	docker-compose exec php-fpm bash
