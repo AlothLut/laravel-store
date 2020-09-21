@@ -2,6 +2,9 @@ FROM php:7.2-fpm
 
 WORKDIR /var/www
 
+# Copy composer.lock and composer.json
+COPY composer.lock composer.json /var/www/
+
 # Install dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
