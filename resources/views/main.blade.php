@@ -57,5 +57,5 @@
         </nav>
     </header>
 </body>
-
+<?dump($categories);?>
 </html>

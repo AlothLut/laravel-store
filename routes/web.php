@@ -6,4 +6,6 @@ Route::group([
     'middleware' => 'CheckLocale'
     ], function () {
     Route::get('/', 'Main@index');
+
+    Route::get('/category/', 'Categories@index');
 });
