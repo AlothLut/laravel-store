@@ -30,7 +30,7 @@ class CheckLocale
      */
     public static function getLocalePrefix()
     {
-        $prefix = app()['request']->segment(1);
+        $prefix = request()->segment(1);
         $prefix = (in_array($prefix, config('app.languages')))? $prefix : null;
         return $prefix;
     }
