@@ -38,31 +38,31 @@
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" class="form-control" name="name" placeholder="Name"
-                value="{{ isset($product)? $product->name : null }}"
+                value="{{ old("name", isset($product)? $product->name : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">slug</label>
             <input type="text" class="form-control" name="slug" placeholder="slug"
-                value="{{ isset($product)? $product->slug : null }}"
+                value="{{ old("slug", isset($product)? $product->slug : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">name_ru</label>
             <input type="text" class="form-control" name="name_ru" placeholder="name_ru"
-                value="{{ isset($product)? $product->name_ru : null }}"
+                value="{{ old("name_ru", isset($product)? $product->name_ru : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">name_en</label>
             <input type="text" class="form-control" name="name_en" placeholder="name_en"
-                value="{{ isset($product)? $product->name_en : null }}"
+                value="{{ old("name_en", isset($product)? $product->name_en : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">status</label>
             <input type="text" class="form-control" name="status" placeholder="status"
-                value="{{ isset($product)? $product->status : null }}"
+                value="{{ old("status", isset($product)? $product->status : null) }}"
             >
         </div>
         <div class="form-group">
@@ -70,31 +70,31 @@
             <textarea class="form-control" 
                 name="description_ru" 
                 placeholder="description_ru"
-            >{{ isset($product)? $product->description_ru : null }}</textarea>
+            >{{ old("description_ru", isset($product)? $product->description_ru : null) }}</textarea>
         </div>
         <div class="form-group">
             <label for="description_ru">description_en</label>
             <textarea class="form-control" 
                 name="description_en" 
                 placeholder="description_en"
-            >{{ isset($product)? $product->description_en : null }}</textarea>
+            >{{ old("description_en", isset($product)? $product->description_en : null) }}</textarea>
         </div>
         <div class="form-group">
             <label for="name">brand</label>
             <input type="text" class="form-control" name="brand" placeholder="brand"
-                value="{{ isset($product)? $product->brand : null }}"
+                value="{{ old("brand", isset($product)? $product->brand : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">quantity</label>
             <input type="text" class="form-control" name="quantity" placeholder="quantity"
-                value="{{ isset($product)? $product->quantity : null }}"
+                value="{{ old("quantity", isset($product)? $product->quantity : null) }}"
             >
         </div>
         <div class="form-group">
             <label for="name">price</label>
             <input type="text" class="form-control" name="price" placeholder="price"
-                value="{{ isset($product)? $product->price : null }}"
+                value="{{ old("price", isset($product)? $product->price : null) }}"
             >
         </div>
 
