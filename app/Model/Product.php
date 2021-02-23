@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +8,7 @@ class Product extends Model
 {
     protected $table = 'products';
 
-    protected $fillable = ['name', 'code'];
+    protected $guarded = ['id'];
 
     /**
      * Get the category associated with the product.
@@ -20,6 +20,11 @@ class Product extends Model
 
     public static function getTableName()
     {
-        return with(new static)->getTable();
+        return with(new static )->getTable();
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProdictsImages::class);
     }
 }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AdminProduct;
-use App\ProdictsImages;
-use App\Product;
+use App\Http\Requests\AdminProductStore;
+use App\Http\Requests\AdminProductUpdate;
+use App\Model\Product;
 use App\Services\AdminProductService;
-use Illuminate\Http\Request;
 
 class AdminProductsController extends Controller
 {
@@ -18,40 +17,86 @@ class AdminProductsController extends Controller
         $this->adminProductService = $adminProductService;
     }
 
-    public function create(AdminProduct $request)
+    /**
+     * Display list products for admin.
+     *
+     * @return View
+     */
+    public function index()
     {
         return view(
-            'catalog-product.create',
-            $this->adminProductService->getCreate($request)
+            'admin-product.index',
+            $this->adminProductService->handleIndex()
         );
     }
 
-    public function store(Request $request)
+    /**
+     * Display create form.
+     *
+     * @return View
+     */
+    public function create()
     {
-        $request->validate([
-            'images.*' => config('validate.products.image'),
-            'name' => 'required',
-            'code' => 'required',
-        ]);
-        $product = new Product();
-        $product->name = request('name');
-        $product->code = request('code');
-        $product->name_ru = request('name_ru');
-        $product->name_en = request('name_en');
-        $product->description_ru = request('description_ru');
-        $product->description_en = request('description_en');
-        $product->save();
-        if ($request->hasFile('images') && isset($product->id)) {
-            $images = $request->file('images');
-            foreach ($images as $image) {
-                $path = $image->store('images');
-                $productImage = new ProdictsImages();
-                $productImage->image_src = $path;
-                $productImage->product_id = $product->id;
-                $productImage->save();
-            }
-        }
+        return view(
+            'admin-product.form',
+            $this->adminProductService->handleCreate()
+        );
+    }
 
-        return redirect('/catalog/create');
+    /**
+     * Store a newly created product and images in storage.
+     *
+     * @param AdminProductStore $request
+     * @return RedirectResponse
+     */
+    public function store(AdminProductStore $request)
+    {
+        $this->adminProductService->handleStore($request);
+        return redirect()->route('admin.index.products');
+    }
+
+    /**
+     * @param \App\Model\Product $product
+     * @return View
+     */
+    public function show(Product $product)
+    {
+        return view(
+            'admin-product.show',
+            $this->adminProductService->handleShow($product)
+        );
+    }
+
+    /**
+     * @param \App\Model\Product $product
+     * @return View
+     */
+    public function edit(Product $product)
+    {
+        return view(
+            'admin-product.form',
+            $this->adminProductService->handleEdit($product)
+        );
+    }
+
+    /**
+     * @param AdminProductUpdate $request
+     * @param \App\Model\Product $product
+     * @return RedirectResponse
+     */
+    public function update(AdminProductUpdate $request, Product $product)
+    {
+        $this->adminProductService->handleUpdate($request, $product);
+        return redirect()->route('admin.index.products');
+    }
+
+    /**
+     * @param \App\Model\Product $product
+     * @return RedirectResponse
+     */
+    public function destroy(Product $product)
+    {
+        $this->adminProductService->handleDestroy($product);
+        return redirect()->route('admin.index.products');
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Model\Category;
 
 class CategoriesController extends Controller
 {

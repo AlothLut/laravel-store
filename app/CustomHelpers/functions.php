@@ -1,6 +1,6 @@
 <?php
-if (!function_exists('setElementLang')) {
-    function setElementLang(array &$element): bool
+if (!function_exists('loc')) {
+    function loc(array &$element): bool
     {
         if (empty($element)) {
             return false;

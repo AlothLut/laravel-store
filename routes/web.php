@@ -1,7 +1,7 @@
 <?php
 /*
 |--------------------------------------------------------------------------
-| Actions Handled By Resource Controller
+| Example Actions Handled By Resource Controller
 |--------------------------------------------------------------------------
 |   GET         /products                   index      products.index
 |   GET         /products/create            create     products.create
@@ -20,22 +20,15 @@ Route::group([
     'middleware' => 'CheckLocale',
 ], function () {
 
-    Route::resource('/admin/product', AdminProductsController::class);
+    Route::resource('/admin/products', AdminProductsController::class);
 
-    // Route::get('/catalog/{category}/{product-code}', 'CategoriesController@index')
-    //     ->name('categories.show');
-
-    // Route::get('/catalog/create', 'ProductsController@create')
-    //     ->name('create.product');
-
-    // Route::post('/catalog/create', 'ProductsController@store')
-    //     ->name('create.product.post');
-
-    // Route::get('/catalog/{product-code}', 'ProductsController@showDetail')
-    //     ->name('showDetail.product');
-
-    Route::resource('/admin/product', AdminProductsController::class)->names([
-        'create' => 'create.product',
-        'store' => 'create.product.post'
+    Route::resource('/admin/products', AdminProductsController::class)->names([
+        'index' => 'admin.index.products',
+        'create' => 'admin.create.product',
+        'store' => 'admin.create.product.post',
+        'show' => 'admin.show.product',
+        'edit' => 'admin.edit.product',
+        'update' => 'admin.update.product',
+        'destroy' => 'admin.destroy.product',
     ]);
 });
