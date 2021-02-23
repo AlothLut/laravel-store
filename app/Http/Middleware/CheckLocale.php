@@ -3,8 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App;
-use Request;
+use Illuminate\Http\Request;
 
 class CheckLocale
 {
@@ -12,9 +11,9 @@ class CheckLocale
     /**
      * @return mixed
      */
-    public static function getLocale()
+    public static function getLocale(Request $request)
     {
-        $uri = Request::path();
+        $uri = $request->path();
 
         $segmentsURI = explode('/', $uri);
 
@@ -27,6 +26,16 @@ class CheckLocale
     }
 
     /**
+     * @return mixed
+     */
+    public static function getLocalePrefix()
+    {
+        $prefix = request()->segment(1);
+        $prefix = (in_array($prefix, config('app.languages')))? $prefix : null;
+        return $prefix;
+    }
+
+    /**
      * Handle an incoming request.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -35,12 +44,12 @@ class CheckLocale
      */
     public function handle($request, Closure $next)
     {
-        $locale = self::getLocale();
+        $locale = self::getLocale($request);
 
         if (isset($locale)) {
-            App::setLocale($locale);
+            app()->setLocale($locale);
         } else {
-            App::setLocale(config('app.locale'));
+            app()->setLocale(config('app.locale'));
         }
         return $next($request);
     }

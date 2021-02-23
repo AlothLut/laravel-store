@@ -11,5 +11,14 @@ const mix = require('laravel-mix');
  |
  */
 
+mix.webpackConfig({
+    resolve: {
+        alias: {
+            '@main': path.resolve(__dirname, 'resources/js/main/'),
+        },
+        extensions: [".js", ".jsx", ".css", ".scss", ".less", ".vue"],
+    }
+});
+
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

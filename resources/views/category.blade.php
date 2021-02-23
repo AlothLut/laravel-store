@@ -1,4 +1,4 @@
 @extends('master')
 @section('content')
-<div>Main Page</div>
+<div>{{ $category }}</div>
 @stop

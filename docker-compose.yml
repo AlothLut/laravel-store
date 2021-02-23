@@ -16,12 +16,12 @@ services:
         volumes:
             - ./:/var/www
             - ./docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini
-            - ./docker/php-fpm/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - ./docker/php-fpm/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
         networks:
             - app-network
 
     db:
-        image: mysql:8.0.21
+        image: mysql:5.7
         container_name: "laravel-store-db"
         restart: unless-stopped
         ports:
