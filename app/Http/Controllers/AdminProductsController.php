@@ -97,6 +97,7 @@ class AdminProductsController extends Controller
     public function destroy(Product $product)
     {
         $this->adminProductService->handleDestroy($product);
-        return redirect()->route('admin.index.products');
+        return redirect()->route('admin.index.products')
+            ->withSuccess($product->name . ' ' . __('messages.deleted'));
     }
 }

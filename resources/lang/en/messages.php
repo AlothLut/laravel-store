@@ -12,4 +12,5 @@ return [
     'edit' => 'Edit',
     'show' => 'Show',
     'delete' => 'Delete',
+    'deleted' => 'has been deleted',
 ];

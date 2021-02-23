@@ -1,6 +1,11 @@
 @extends('master')
 @section('content')
 <div class="container mt-5">
+    @if(session('success'))
+        <div class="alert alert-danger">
+            {{session('success')}}
+        </div>
+    @endif
     <div class="py-3 d-grid gap-2 d-md-flex justify-content-md-end">
         <a href="{{ route('admin.create.product') }}" type="button" class="btn btn-primary">
             @lang('messages.create')
