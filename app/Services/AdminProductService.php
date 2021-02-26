@@ -17,7 +17,7 @@ class AdminProductService
      */
     public function handleIndex(): array
     {
-        $products = Product::paginate(1);
+        $products = Product::paginate(7);
 
         return [
             'products' => $products,

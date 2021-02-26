@@ -17,6 +17,7 @@ services:
             - ./:/var/www
             - ./docker/php-fpm/local.ini:/usr/local/etc/php/conf.d/local.ini
             - ./docker/php-fpm/conf.d/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini
+            - /etc/localtime:/etc/localtime:ro # ro - means container can only read from /etc/localtime of host-machine
         networks:
             - app-network
 
@@ -37,6 +38,7 @@ services:
             - dbdata:/var/lib/mysql/
             - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
             - ./docker/var/log/mysql:/var/log/mysql
+            - /etc/localtime:/etc/localtime:ro
         networks:
             - app-network
 
