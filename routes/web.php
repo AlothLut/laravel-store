@@ -13,14 +13,16 @@
 |
  */
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::group([
     'prefix' => \App\Http\Middleware\CheckLocale::getLocalePrefix(),
-    'middleware' => 'CheckLocale',
+    'middleware' => 'check_locale',
 ], function () {
-
-    Route::resource('/admin/products', AdminProductsController::class);
+    Auth::routes();
+    Route::get('/login/admin', 'Auth\LoginController@showAdminLoginForm');
+    Route::post('/login/admin', 'Auth\LoginController@adminLogin');
 
     Route::resource('/admin/products', AdminProductsController::class)->names([
         'index' => 'admin.index.products',
@@ -30,5 +32,7 @@ Route::group([
         'edit' => 'admin.edit.product',
         'update' => 'admin.update.product',
         'destroy' => 'admin.destroy.product',
-    ]);
+    ])->middleware('auth:admin');
+
+    Route::get('/', [App\Http\Controllers\Main::class, 'index'])->middleware('auth:web,admin');
 });
